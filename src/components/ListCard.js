@@ -23,31 +23,31 @@ const ListCard = (props) => {
   let MID_ICON;
   let DP_ICON;
 
-  let card = "user";
+  let card = "priority";
   if (card === "user") {
     CARD_TITLE = id;
     MESSAGE_BODY = title;
     BOTTOM_TAG = tag;
     BOTTOM_ICON = <FooterIcon />;
-    MID_ICON = tag;
-    // dpIcon =
+    MID_ICON = <MidIcon />;
+    DP_ICON = null;
   } else if (card === "status") {
     CARD_TITLE = id;
     MESSAGE_BODY = title;
     BOTTOM_TAG = tag;
     BOTTOM_ICON = <FooterIcon />;
-    // midIcon = userId;
+    MID_ICON = null;
     DP_ICON = <DpIcon />;
   } else if (card === "priority") {
     CARD_TITLE = id;
     MESSAGE_BODY = title;
     BOTTOM_TAG = tag;
-    // bottonIcon = status;
-    MID_ICON = (<MidIcon />)
-    DP_ICON = <DpIcon />;
+    BOTTOM_ICON = null;
+    MID_ICON = <MidIcon />;
+    DP_ICON = <DpIcon height="22px" width="22px" />;
   }
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div>
@@ -58,7 +58,6 @@ const ListCard = (props) => {
           paddingBottom: "10px",
           flexGrow: "1",
           // backgroundColor: "red",
-
           justifyContent: "space-between",
           alignItems: "space-between;",
         }}
@@ -69,31 +68,13 @@ const ListCard = (props) => {
               <div>
                 <div className="CardTitleBar">
                   <div className="CardTitleText">{CARD_TITLE}</div>
-                  {/* {MID_ICON} */}
                 </div>
                 <div className="CardBody">
-                  <div className="CardBody">
-                    <IconContext.Provider
-                      value={{ color: "blue", size: "8px" }}
-                    >
-                      <div className="CardBodyIcon">
-                        <BsExclamationSquareFill />
-                      </div>
-                    </IconContext.Provider>
-                  </div>
+                  {MID_ICON}
                   <div className="CardBodyText">{MESSAGE_BODY}</div>
                 </div>
                 <div className="CardFooter">
-                  {/* <div className="FooterIcon"> */}
-                  {/* <LiaEllipsisHSolid /> */}
-                  {/* <IconContext.Provider value={{ color: "grey", size: "14px" }}>
-              <div className="FooterIcon">
-                {/* <BsExclamationSquareFill /> */}
-                  {/* <HiOutlineEllipsisHorizontal /> */}
-                  {/* </div> */}
-                  {/* </IconContext.Provider> */}
                   {BOTTOM_ICON}
-                  {/* </div> */}
                   <div className="FooterTextBox">
                     <div className="FooterCircle"></div>
                     <div className="FooterText">{BOTTOM_TAG}</div>
@@ -102,9 +83,7 @@ const ListCard = (props) => {
               </div>
             </div>
           </div>
-          <div>
-            <DpIcon height="22px" width="22px" />
-          </div>
+          <div>{DP_ICON}</div>
         </div>
       </div>
     </div>
@@ -132,7 +111,6 @@ export const FooterIcon = (props) => {
   return (
     <IconContext.Provider value={{ color: "grey", size: "14px" }}>
       <div className="FooterIcon">
-        {/* <BsExclamationSquareFill /> */}
         <HiOutlineEllipsisHorizontal />
       </div>
     </IconContext.Provider>
@@ -141,12 +119,43 @@ export const FooterIcon = (props) => {
 
 const MidIcon = () => {
   return (
-    <div className="CardTitleLogo" style={{ height: "24px", width: "24px" }}>
-      <img
-        src="wepik-export-20231101173926A2LC.jpeg"
-        className="CardTitleLogo"
-      />
-      <div className="CardTitleLogoStatus" />
-    </div>
+    // <div className="CardBody">
+    <IconContext.Provider value={{ color: "blue", size: "10px" }}>
+      <div className="CardBodyIcon">
+        <BsExclamationSquareFill />
+      </div>
+    </IconContext.Provider>
+    // </div>
   );
 };
+
+{
+  /* <div className="CardTitleLogo" style={{ height: "24px", width: "24px" }}>
+<img
+  src="wepik-export-20231101173926A2LC.jpeg"
+  className="CardTitleLogo"
+/>
+<div className="CardTitleLogoStatus" />
+</div> */
+}
+
+{
+  /* <div className="FooterIcon"> */
+}
+{
+  /* <LiaEllipsisHSolid /> */
+}
+{
+  /* <IconContext.Provider value={{ color: "grey", size: "14px" }}>
+              <div className="FooterIcon">
+                {/* <BsExclamationSquareFill /> */
+}
+{
+  /* <HiOutlineEllipsisHorizontal /> */
+}
+{
+  /* </div> */
+}
+{
+  /* </IconContext.Provider> */
+}

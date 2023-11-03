@@ -87,7 +87,7 @@ const TopBar = (props) => {
         style={{
           //   margin: "5px",
           marginTop: "15px",
-          marginBottom: "15px",
+          marginBottom: "0px",
           marginLeft: "40px",
         }}
       >
