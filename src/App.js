@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import ListHeader from "./components/ListHeader";
+import ListCard from "./components/ListCard";
+import Main from "./components/Main";
+import ColumnBox from "./components/ColumnBox";
+import Dashboard from "./components/Dashboard";
+import TopBar from "./components/TopBar";
+
+import { CookiesProvider } from "react-cookie";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CookiesProvider>
+      <Main />
+    </CookiesProvider>
+
+    // <ListCard/>
+    // <ListHeader/>
+    // <ColumnBox/>
+    // <Dashboard/>
+    // <TopBar />
   );
 }
 

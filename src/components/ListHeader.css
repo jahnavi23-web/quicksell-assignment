@@ -1,0 +1,90 @@
+.HeaderBox {
+  background-color: #f4f5f8;
+  padding: 2px;
+
+  margin-bottom: 15px;
+
+  /* width: 300px; */
+
+  display: flex;
+  flex-direction: row;
+  /* width: 100%; */
+
+  /* box-shadow: 0px 0px 1px #333333; */
+
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.HeaderUserBox {
+  display: flex;
+  flex-direction: row;
+
+  flex-grow: 1;
+
+  justify-content: flex-start;
+  align-items: center;
+}
+.HeaderIcon {
+  /* background-color: pink; */
+  padding: 2px;
+
+  display: flex;
+}
+.HeaderTitle {
+  /* background-color: pink; */
+  padding-left: 4px;
+  padding-right: 4px;
+
+  display: flex;
+  color: #222222;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+.HeaderCount {
+  /* background-color: pink; */
+  padding-left: 4px;
+  padding-right: 4px;
+
+  display: flex;
+  color: #888888;
+
+  font-size: 12px;
+  font-weight: bold;
+
+  text-align: center;
+}
+
+.HeaderOptions {
+  display: flex;
+  flex-direction: row;
+
+  /* flex-grow: 1; */
+}
+.HeaderPlus {
+  /* background-color: pink; */
+  padding: 1px;
+
+  display: flex;
+  font-size: 16px;
+  color: #555555;
+}
+.HeaderElipsis {
+  /* background-color: pink; */
+  padding: 1px;
+
+  display: flex;
+  font-size: 16px;
+
+  color: #555555;
+}
+
+.Spacer {
+    /* display: flex;
+    flex-grow: 5;
+    width: 3px;
+
+    background-color: yellow; */
+}
