@@ -20,11 +20,25 @@ const ColumnBox = (props) => {
       }}
     >
       <ListHeader title={props.user.name} count={3} logo={null} />
-      <ul>
+      {/* <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: "1",
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
+          // backgroundColor: 'blue',
+
+          listStyle: 'none',
+          listStyleType: 'none', 
+          // width: '250px'
+        }}
+      > */}
         {tickets.map((ticket) => {
           return <ListCard data={ticket} />;
         })}
-      </ul>
+      {/* </div> */}
     </li>
   );
 };

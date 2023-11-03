@@ -16,91 +16,98 @@ const ListCard = (props) => {
   let title = data.title;
   let userId = props.userId;
 
-  let cardTitle;
-  let message;
-  let bottomTag;
-  let bottonIcon;
-  let midIcon;
-  let dpIcon;
+  let CARD_TITLE;
+  let MESSAGE_BODY;
+  let BOTTOM_TAG;
+  let BOTTOM_ICON;
+  let MID_ICON;
+  let DP_ICON;
 
   let card = "user";
-  if(card === 'user') {
-    cardTitle = id;
-    message = title;
-    bottomTag = tag;
-    bottonIcon = status;
-    midIcon = tag;
-    dpIcon = tag;
-  } else if (card === 'status') {
-    cardTitle = id;
-    message = title;
-    bottomTag = tag;
-    bottonIcon = status;
-    midIcon = userId;
-    dpIcon = userId;
-  } else if (card === 'priority') {
-    cardTitle = id;
-    message = title;
-    bottomTag = tag;
-    bottonIcon = status;
-    midIcon = tag;
-    dpIcon = tag;
+  if (card === "user") {
+    CARD_TITLE = id;
+    MESSAGE_BODY = title;
+    BOTTOM_TAG = tag;
+    BOTTOM_ICON = <FooterIcon />;
+    MID_ICON = tag;
+    // dpIcon =
+  } else if (card === "status") {
+    CARD_TITLE = id;
+    MESSAGE_BODY = title;
+    BOTTOM_TAG = tag;
+    BOTTOM_ICON = <FooterIcon />;
+    // midIcon = userId;
+    DP_ICON = <DpIcon />;
+  } else if (card === "priority") {
+    CARD_TITLE = id;
+    MESSAGE_BODY = title;
+    BOTTOM_TAG = tag;
+    // bottonIcon = status;
+    MID_ICON = (<MidIcon />)
+    DP_ICON = <DpIcon />;
   }
 
-console.log(data);
+  console.log(data);
 
   return (
-    <li
-      style={{ display: "flex", flexDirection: "row", paddingBottom: "10px" }}
-    >
-      <div className="ListCard">
-        <div className="ListCardInfo">
-          <div className="CardTitleBar">
-            <div className="CardTitleText">{cardTitle}</div>
-            {/* <div
-          className="CardTitleLogo"
-          style={{ height: "24px", width: "24px" }}
-        >
-          <img
-            src="wepik-export-20231101173926A2LC.jpeg"
-            className="CardTitleLogo"
-          />
-          <div className="CardTitleLogoStatus" />
-        </div> */}
-          </div>
-          <div className="CardBody">
-            <div>
-              <IconContext.Provider value={{ color: "blue", size: "8px" }}>
-                <div className="CardBodyIcon">
-                  <BsExclamationSquareFill />
+    <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          paddingBottom: "10px",
+          flexGrow: "1",
+          backgroundColor: "red",
+
+          justifyContent: "space-between",
+          alignItems: "space-between;",
+        }}
+      >
+        <div className="ListCard">
+          <div style={{ display: "flex", flexDirection: "row", flexGrow: "1" }}>
+            <div className="ListCardInfo">
+              <div>
+                <div className="CardTitleBar">
+                  <div className="CardTitleText">{CARD_TITLE}</div>
+                  {/* {MID_ICON} */}
                 </div>
-              </IconContext.Provider>
-            </div>
-            <div className="CardBodyText">
-              {message}<div>{" "}</div>
-            </div>
-          </div>
-          <div className="CardFooter">
-            {/* <div className="FooterIcon"> */}
-            {/* <LiaEllipsisHSolid /> */}
-            <IconContext.Provider value={{ color: "grey", size: "14px" }}>
+                <div className="CardBody">
+                  <div className="CardBody">
+                    <IconContext.Provider
+                      value={{ color: "blue", size: "8px" }}
+                    >
+                      <div className="CardBodyIcon">
+                        <BsExclamationSquareFill />
+                      </div>
+                    </IconContext.Provider>
+                  </div>
+                  <div className="CardBodyText">{MESSAGE_BODY}</div>
+                </div>
+                <div className="CardFooter">
+                  {/* <div className="FooterIcon"> */}
+                  {/* <LiaEllipsisHSolid /> */}
+                  {/* <IconContext.Provider value={{ color: "grey", size: "14px" }}>
               <div className="FooterIcon">
                 {/* <BsExclamationSquareFill /> */}
-                <HiOutlineEllipsisHorizontal />
+                  {/* <HiOutlineEllipsisHorizontal /> */}
+                  {/* </div> */}
+                  {/* </IconContext.Provider> */}
+                  {BOTTOM_ICON}
+                  {/* </div> */}
+                  <div className="FooterTextBox">
+                    <div className="FooterCircle"></div>
+                    <div className="FooterText">{BOTTOM_TAG}</div>
+                  </div>
+                </div>
               </div>
-            </IconContext.Provider>
-            {/* </div> */}
-            <div className="FooterTextBox">
-              <div className="FooterCircle"></div>
-              <div className="FooterText">{bottomTag}</div>
             </div>
           </div>
-        </div>
-        <div>
-          <DpIcon height="22px" width="22px" />
+          <div>
+            <DpIcon height="22px" width="22px" />
+          </div>
         </div>
       </div>
-    </li>
+    </div>
   );
 };
 
@@ -112,6 +119,29 @@ export const DpIcon = (props) => {
       className="CardTitleLogo"
       style={{ height: props.height, width: props.width }}
     >
+      <img
+        src="wepik-export-20231101173926A2LC.jpeg"
+        className="CardTitleLogo"
+      />
+      <div className="CardTitleLogoStatus" />
+    </div>
+  );
+};
+
+export const FooterIcon = (props) => {
+  return (
+    <IconContext.Provider value={{ color: "grey", size: "14px" }}>
+      <div className="FooterIcon">
+        {/* <BsExclamationSquareFill /> */}
+        <HiOutlineEllipsisHorizontal />
+      </div>
+    </IconContext.Provider>
+  );
+};
+
+const MidIcon = () => {
+  return (
+    <div className="CardTitleLogo" style={{ height: "24px", width: "24px" }}>
       <img
         src="wepik-export-20231101173926A2LC.jpeg"
         className="CardTitleLogo"
