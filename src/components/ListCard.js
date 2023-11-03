@@ -57,7 +57,7 @@ const ListCard = (props) => {
           flexDirection: "row",
           paddingBottom: "10px",
           flexGrow: "1",
-          backgroundColor: "red",
+          // backgroundColor: "red",
 
           justifyContent: "space-between",
           alignItems: "space-between;",
