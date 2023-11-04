@@ -6,6 +6,7 @@ import { LiaEllipsisHSolid } from "react-icons/lia";
 import { BsExclamationSquareFill } from "react-icons/bs";
 import { IconContext } from "react-icons/lib";
 import { HiOutlineEllipsisHorizontal } from "react-icons/hi2";
+import { useEffect } from "react";
 
 const ListCard = (props) => {
   let data = props.data;
@@ -23,29 +24,30 @@ const ListCard = (props) => {
   let MID_ICON;
   let DP_ICON;
 
-  let card = "priority";
-  if (card === "user") {
-    CARD_TITLE = id;
-    MESSAGE_BODY = title;
-    BOTTOM_TAG = tag;
-    BOTTOM_ICON = <FooterIcon />;
-    MID_ICON = <MidIcon />;
-    DP_ICON = null;
-  } else if (card === "status") {
-    CARD_TITLE = id;
-    MESSAGE_BODY = title;
-    BOTTOM_TAG = tag;
-    BOTTOM_ICON = <FooterIcon />;
-    MID_ICON = null;
-    DP_ICON = <DpIcon />;
-  } else if (card === "priority") {
-    CARD_TITLE = id;
-    MESSAGE_BODY = title;
-    BOTTOM_TAG = tag;
-    BOTTOM_ICON = null;
-    MID_ICON = <MidIcon />;
-    DP_ICON = <DpIcon height="22px" width="22px" />;
-  }
+
+    if (props.mode === "USER") {
+      CARD_TITLE = id;
+      MESSAGE_BODY = title;
+      BOTTOM_TAG = tag;
+      BOTTOM_ICON = <FooterIcon />;
+      MID_ICON = <MidIcon />;
+      DP_ICON = null;
+    } else if (props.mode === "STATUS") {
+      CARD_TITLE = id;
+      MESSAGE_BODY = title;
+      BOTTOM_TAG = tag;
+      BOTTOM_ICON = <FooterIcon />;
+      MID_ICON = null;
+      DP_ICON = <DpIcon height="22px" width="22px" />;
+    } else if (props.mode === "PRIORITY") {
+      CARD_TITLE = id;
+      MESSAGE_BODY = title;
+      BOTTOM_TAG = tag;
+      BOTTOM_ICON = null;
+      MID_ICON = <MidIcon />;
+      DP_ICON = <DpIcon height="22px" width="22px" />;
+    }
+
 
   // console.log(data);
 

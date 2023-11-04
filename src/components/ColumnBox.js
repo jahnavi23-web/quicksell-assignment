@@ -87,7 +87,7 @@ const ColumnBox = (props) => {
         <ListHeader title={title} count={count} logo={null} />
         <div className="conversation">
           {array.map((ticket) => {
-            return <ListCard data={ticket} key={ticket.id} />;
+            return <ListCard data={ticket} key={ticket.id} mode={props.mode}/>;
           })}
         </div>
       </div>
