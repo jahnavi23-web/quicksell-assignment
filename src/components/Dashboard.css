@@ -1,0 +1,13 @@
+.DashboardColumnList {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+
+    background-color: #f4f5f8;
+
+    padding-left: 25px;
+    padding-right: 15px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}

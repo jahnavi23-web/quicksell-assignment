@@ -3,25 +3,32 @@ import Dashboard from "./Dashboard";
 import TopBar from "./TopBar";
 
 function Main() {
-  const [state, setState] = useState({group: 1, order: 4});
+  const [state, setState] = useState({group: 0, order: 0});
   // const stateRef = useRef(state);
-  let stateVar = state;
+  // let stateVar = state;
+  // console.log(state);
 
+
+  useEffect(()=> {
+    console.log(state);
+  })
   // useEffect(() => {
   //   stateVar = state;
   // }, [])
 
-  function handleStateChager(state) {
+
+  function handleStateChager(stateUpdate) {
+    // console.log('handleStateChager');
     // stateRef.current = state;
-    setState(state);
+    setState({...stateUpdate});
     // stateRef.current = state;
-    stateVar = state;
+    // stateVar = stateUpdate;
   }
 
   return (
     <div>
       <TopBar handler={handleStateChager}  />
-      <Dashboard state={state} />
+      {/* <Dashboard state={state} /> */}
     </div>
   );
 }
