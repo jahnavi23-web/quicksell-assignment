@@ -18,11 +18,11 @@ const TopBar = (props) => {
 
   useEffect(() => {
     if (cookies.Group == 0 || cookies.Group == 1 || cookies.Group == 2) {
-      console.log("Cookies already exists");
+      // console.log("Cookies already exists");
       let new_state = { group: cookies.Group, order: cookies.Order };
       props.handler(new_state);
     } else {
-      console.log("Cookie doesn't exist, Creating cookies");
+      // console.log("Cookie doesn't exist, Creating cookies");
       let new_state = { group: 0, order: 0 };
       setCookie("Group", state.group, { path: "/" });
       setCookie("Order", state.order, { path: "/" });

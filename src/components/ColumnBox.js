@@ -7,8 +7,13 @@ const ColumnBox = (props) => {
 
   let mode = props.mode;
   let array = props.array;
+  let users = props.users;
 
-  console.log(props);
+  const priorityNames = ["No priority", "Low", "Medium", "High", "Urgent"];
+
+  const status = ["In progress", "Todo", "Backlog", "Done", "Canceled"];
+
+  // console.log(props);
 
   // const [title, setTitle] = useState('title');
   // let title = "title";
@@ -18,36 +23,48 @@ const ColumnBox = (props) => {
 
   useEffect(() => {
     if (mode === "STATUS") {
-      for (let i = 0; i < props.array.length; i++) {
-        if (props.array[i].status != "") {
-          // titles.push(props.array[i].status);
-          setTitle(props.array[i].status);
-        } else {
-          // titles.push("No status");
-          // props.array[i].status("       ")
-        }
+      if(props.array.length !== 0) {
+        setTitle(props.array[0].status);
       }
-      console.log("status " + title);
+      // for (let i = 0; i < props.array.length; i++) {
+      //   if (props.array[i].status != "") {
+      //     // titles.push(props.array[i].status);
+      //     setTitle(props.array[i].status);
+      //   } else {
+      //     // titles.push("No status");
+      //     // props.array[i].status("       ")
+      //   }
+      // }
+      // console.log("status " + title);
     } else if (mode === "USER") {
-      for (let i = 0; i < props.array.length; i++) {
-        if (props.array[i].name != "") {
-          // titles.push(props.array[i].status);
-          setTitle(props.array[i].name);
-        } else {
-          // titles.push("No name");
-        }
+      if(props.array.length !== 0) {
+        let user = props.users.find((user)=>{return (user.id === props.array[0].userId)});
+
+        // props.array[0].userId
+        setTitle(user.name);
       }
-      console.log("user " + title);
+      // for (let i = 0; i < props.array.length; i++) {
+      //   if (props.array[i].name != "") {
+      //     // titles.push(props.array[i].status);
+      //     setTitle(props.array[i].name);
+      //   } else {
+      //     // titles.push("No name");
+      //   }
+      // }
+      // console.log("user " + title);
     } else if (mode === "PRIORITY") {
-      for (let i = 0; i < props.array.priority; i++) {
-        if (props.array[i].status != "") {
-          // titles.push(props.array[i].status);
-          setTitle(props.array[i].status);
-        } else {
-          // titles.push("No priority");
-        }
+      if(props.array.length !== 0) {
+        setTitle(priorityNames[props.array[0].priority]);
       }
-      console.log("priority " + title);
+      // for (let i = 0; i < props.array.length; i++) {
+      //   if (props.array[i].priority != "") {
+      //     // titles.push(props.array[i].status);
+      //     setTitle(props.array[i].priority);
+      //   } else {
+      //     // titles.push("No priority");
+      //   }
+      // }
+      // console.log("priority " + title);
     }
 
     // console.log(titles);
@@ -62,6 +79,7 @@ const ColumnBox = (props) => {
   });
 
   return (
+  
     <li
       style={{
         display: "flex",
@@ -80,9 +98,9 @@ const ColumnBox = (props) => {
           flexDirection: "column",
           flexGrow: "1",
           justifyContent: "center",
-          alignContent: "center",
-          alignItems: "center",
-          // backgroundColor: 'blue',
+          alignContent: "flex-start",
+          alignItems: "flex-start",
+          backgroundColor: 'blue',
 
           listStyle: "none",
           listStyleType: "none",
@@ -95,6 +113,8 @@ const ColumnBox = (props) => {
       </div>
     </li>
   );
+
+  // return <div></div>
 };
 
 export default ColumnBox;

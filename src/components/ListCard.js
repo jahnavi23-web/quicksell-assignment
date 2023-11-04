@@ -50,11 +50,17 @@ const ListCard = (props) => {
   // console.log(data);
 
   return (
-    <div>
+    <div
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      // flexGrow: "1",
+    }}
+    >
       <div
         style={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           paddingBottom: "10px",
           flexGrow: "1",
           // backgroundColor: "red",

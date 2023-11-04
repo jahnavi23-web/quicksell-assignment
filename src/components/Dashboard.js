@@ -4,21 +4,19 @@ import ColumnBox from "./ColumnBox";
 const Dashboard = (props) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(undefined);
-  const [data, setData] = useState(undefined);
-  const [dataOut, setDataOut] = useState(undefined);
+  const [data, setData] = useState([undefined]);
+  const [dataOut, setDataOut] = useState([[]]);
   const GROUP_MODES = ["STATUS", "USER", "PRIORITY"];
   const ORDER_MODES = ["PRIORITY", "TITLE"];
   const [GROUP_MODE, setGroup] = useState(GROUP_MODES[props.state.group]);
   const [ORDER_MODE, setOrder] = useState(ORDER_MODES[props.state.order]);
 
+  const dataOutArray = [[]];
 
   // let GroupedOrderedData;
 
   const url = "https://api.quicksell.co/v1/internal/frontend-assignment";
 
-  // var GROUP_MODE = "USER";
-  // var ORDER_MODE = "PRIORITY";
-  
   // if (props.state.group === 1) {
   //   GROUP_MODE = "STATUS";
   // } else if (props.state.group === 2) {
@@ -33,20 +31,28 @@ const Dashboard = (props) => {
   //   ORDER_MODE = "TITLE";
   // }
 
-  console.log('state: ' + props.state.group + ', ' + props.state.order);
-  console.log('GROUP_MODE: ' + GROUP_MODE + ', ORDER_MODE: ' + ORDER_MODE);
+  useEffect(() => {
+    setGroup(GROUP_MODES[props.state.group]);
+    setOrder(ORDER_MODES[props.state.order]);
 
-  const ticketsByStatus = [];
-  const ticketsByStatusPriority = [];
-  const ticketsByStatusTitle = [];
+    // console.log("state: " + props.state.group + ", " + props.state.order);
+    // console.log("GROUP_MODE: " + GROUP_MODE + ", ORDER_MODE: " + ORDER_MODE);
+  });
 
-  const ticketsByUsers = [];
-  const ticketsByUsersPriority = [];
-  const ticketsByUsersTitle = [];
+  // console.log("state: " + props.state.group + ", " + props.state.order);
+  // console.log("GROUP_MODE: " + GROUP_MODE + ", ORDER_MODE: " + ORDER_MODE);
 
-  const ticketsByPriority = [];
-  const ticketsByPriorityPrio = [];
-  const ticketsByPriorityTitle = [];
+  var ticketsByStatus = [];
+  var ticketsByStatusPriority = [];
+  var ticketsByStatusTitle = [];
+
+  var ticketsByUsers = [];
+  var ticketsByUsersPriority = [];
+  var ticketsByUsersTitle = [];
+
+  var ticketsByPriority = [];
+  var ticketsByPriorityPrio = [];
+  var ticketsByPriorityTitle = [];
 
   const priorities = [0, 1, 2, 3, 4];
   const priorityNames = ["No priority", "Low", "Medium", "High", "Urgent"];
@@ -68,130 +74,172 @@ const Dashboard = (props) => {
           const usersLength = users.length;
           const ticketsLength = tickets.length;
 
+           ticketsByStatus = [];
+           ticketsByStatusPriority = [];
+           ticketsByStatusTitle = [];
+        
+           ticketsByUsers = [];
+           ticketsByUsersPriority = [];
+           ticketsByUsersTitle = [];
+        
+           ticketsByPriority = [];
+           ticketsByPriorityPrio = [];
+           ticketsByPriorityTitle = [];
+
           var testArray = [];
-          if (GROUP_MODE === "USER") {
-            for (var i = 0; i < usersLength; i++) {
-              for (var j = 0; j < ticketsLength; j++) {
-                if (users[i].id === tickets[j].userId) {
-                  testArray.push(tickets[j]);
-                }
-              }
-              ticketsByUsers.push(testArray);
-              testArray = [];
-            }
-
-            if (ORDER_MODE === "PRIORITY") {
-              for (var i = 0; i < usersLength; i++) {
-                testArray = ticketsByUsers[i].sort(function (a, b) {
-                  return b.priority - a.priority;
-                });
-                ticketsByUsersPriority.push(testArray);
-                testArray = [];
-              }
-              setDataOut(ticketsByUsersPriority);
-            } else if (ORDER_MODE === "TITLE") {
-              for (var i = 0; i < usersLength; i++) {
-                testArray = ticketsByUsers[i].sort(function (a, b) {
-                  return a.title - b.title;
-                });
-                ticketsByUsersTitle.push(testArray);
-                testArray = [];
-              }
-              setDataOut(ticketsByUsersTitle);
-            }
-
-            // console.log("ticketsByUsersPriority");
-            // console.log(ticketsByUsersPriority);
-            // console.log("ticketsByUsersTitle");
-            // console.log(ticketsByUsersTitle);
-          } else if (GROUP_MODE === "STATUS") {
-            let statusTypes = [];
-            for(var i = 0; i < ticketsLength; i++) {
-              statusTypes.push(tickets[i].status);
-            }
-
-            let set = new Set(statusTypes);
-            statusTypes = [...set.keys()];
-
-            // console.log(JSON.stringify([...set.keys()]));
-            
-
-            // console.log(statusTypes);
-
-            for (var i = 0; i < statusTypes.length; i++) {
-              for (var j = 0; j < ticketsLength; j++) {
-                if (statusTypes[i] === tickets[j].status) {
-                  testArray.push(tickets[j]);
-                }
-              }
-              ticketsByStatus.push(testArray);
-              testArray = [];
-            }
-
-            if (ORDER_MODE === "PRIORITY") {
-              for (var i = 0; i < statusTypes.length; i++) {
-                testArray = ticketsByStatus[i].sort(function (a, b) {
-                  return b.priority - a.priority;
-                });
-                ticketsByStatusPriority.push(testArray);
-                testArray = [];
-              }
-
-              setDataOut(ticketsByStatusPriority);
-            } else if (ORDER_MODE === "TITLE") {
-              for (var i = 0; i < statusTypes.length; i++) {
-                testArray = ticketsByStatus[i].sort(function (a, b) {
-                  return a.title - b.title;
-                });
-                ticketsByStatusTitle.push(testArray);
-                testArray = [];
-              }
-
-              setDataOut(ticketsByStatusTitle);
-            }
-
-            // console.log('ticketsByStatusPriority');
-            // console.log(ticketsByStatusPriority);
-            // console.log('ticketsByStatusTitle');
-            // console.log(ticketsByStatusTitle);
-          } else if (GROUP_MODE === "PRIORITY") {
-            for (var i = 0; i < priorities.length; i++) {
-              for (var j = 0; j < ticketsLength; j++) {
-                if (priorities[i] === tickets[j].priority) {
-                  testArray.push(tickets[j]);
-                }
-              }
-              ticketsByPriority.push(testArray);
-              testArray = [];
-            }
-
-            if (ORDER_MODE === "PRIORITY") {
-              for (var i = 0; i < priorities.length; i++) {
-                testArray = ticketsByPriority[i].filter(function (a) {
-                  return a.priority === priorities[i];
-                });
-                ticketsByPriorityPrio.push(testArray);
-                testArray = [];
-              }
-
-              setDataOut(ticketsByPriorityPrio);
-            } else if (ORDER_MODE === "TITLE") {
-              for (var i = 0; i < priorities.length; i++) {
-                testArray = ticketsByPriority[i].sort(function (a, b) {
-                  return a.title - b.title;
-                });
-                ticketsByPriorityTitle.push(testArray);
-                testArray = [];
-              }
-
-              setDataOut(ticketsByPriorityTitle);
-            }
-
-            // console.log('ticketsByPriorityPrio');
-            // console.log(ticketsByPriorityPrio);
-            // console.log('ticketsByPriorityTitle');
-            // console.log(ticketsByPriorityTitle);
+          // if (GROUP_MODE === "USER") {
+          let userTypes = [];
+          for (var i = 0; i < ticketsLength; i++) {
+            userTypes.push(tickets[i].name);
           }
+
+          let set = new Set(userTypes);
+          userTypes = [...set.keys()];
+
+          for (var i = 0; i < usersLength; i++) {
+            for (var j = 0; j < ticketsLength; j++) {
+              if (users[i].id === tickets[j].userId) {
+                testArray.push(tickets[j]);
+              }
+            }
+            ticketsByUsers.push(testArray);
+            testArray = [];
+          }
+
+          // if (ORDER_MODE === "PRIORITY") {
+          for (var i = 0; i < usersLength; i++) {
+            testArray = ticketsByUsers[i].sort(function (a, b) {
+              return b.priority - a.priority;
+            });
+            ticketsByUsersPriority.push(testArray);
+            testArray = [];
+          }
+          // setDataOut(ticketsByUsersPriority);
+          // } else if (ORDER_MODE === "TITLE") {
+          for (var i = 0; i < usersLength; i++) {
+            testArray = ticketsByUsers[i].sort(function (a, b) {
+              return a.title - b.title;
+            });
+            ticketsByUsersTitle.push(testArray);
+            testArray = [];
+          }
+          // setDataOut(ticketsByUsersTitle);
+          // }
+
+          // console.log("ticketsByUsersPriority");
+          // console.log(ticketsByUsersPriority);
+          // console.log("ticketsByUsersTitle");
+          // console.log(ticketsByUsersTitle);
+          // } else if (GROUP_MODE === "STATUS") {
+          let statusTypes = [];
+          for (var i = 0; i < ticketsLength; i++) {
+            statusTypes.push(tickets[i].status);
+          }
+
+          set = new Set(statusTypes);
+          statusTypes = [...set.keys()];
+
+          // console.log(JSON.stringify([...set.keys()]));
+
+          // console.log(statusTypes);
+
+          for (var i = 0; i < statusTypes.length; i++) {
+            for (var j = 0; j < ticketsLength; j++) {
+              if (statusTypes[i] === tickets[j].status) {
+                testArray.push(tickets[j]);
+              }
+            }
+            ticketsByStatus.push(testArray);
+            testArray = [];
+          }
+
+          // if (ORDER_MODE === "PRIORITY") {
+          for (var i = 0; i < statusTypes.length; i++) {
+            testArray = ticketsByStatus[i].sort(function (a, b) {
+              return b.priority - a.priority;
+            });
+            ticketsByStatusPriority.push(testArray);
+            testArray = [];
+          }
+
+          // setDataOut(ticketsByStatusPriority);
+          // } else if (ORDER_MODE === "TITLE") {
+          for (var i = 0; i < statusTypes.length; i++) {
+            testArray = ticketsByStatus[i].sort(function (a, b) {
+              return a.title - b.title;
+            });
+            ticketsByStatusTitle.push(testArray);
+            testArray = [];
+          }
+
+          // setDataOut(ticketsByStatusTitle);
+          // }
+
+          // console.log('ticketsByStatusPriority');
+          // console.log(ticketsByStatusPriority);
+          // console.log('ticketsByStatusTitle');
+          // console.log(ticketsByStatusTitle);
+          // } else if (GROUP_MODE === "PRIORITY") {
+          let priorityTypes = [];
+          for (var i = 0; i < ticketsLength; i++) {
+            priorityTypes.push(tickets[i].priority);
+          }
+
+          set = new Set(priorityTypes);
+          priorityTypes = [...set.keys()];
+          // console.log(priorityTypes[0]);
+
+          for (var i = 0; i < priorityTypes.length; i++) {
+            for (var j = 0; j < ticketsLength; j++) {
+              if (priorityTypes[i] === tickets[j].priority) {
+                testArray.push(tickets[j]);
+              }
+              // console.log(testArray);
+            }
+            ticketsByPriority.push(testArray);
+            testArray = [];
+          }
+          // console.log(ticketsByPriority);
+
+          // if (ORDER_MODE === "PRIORITY") {
+          for (var i = 0; i < priorityTypes.length; i++) {
+            testArray = ticketsByPriority[i].filter(function (a) {
+              return a.priority === priorityTypes[i];
+            });
+            ticketsByPriorityPrio.push(testArray);
+            testArray = [];
+          }
+
+          // setDataOut(ticketsByPriorityPrio);
+          // } else if (ORDER_MODE === "TITLE") {
+          for (var i = 0; i < priorityTypes.length; i++) {
+            testArray = ticketsByPriority[i].sort(function (a, b) {
+              return a.title - b.title;
+            });
+            ticketsByPriorityTitle.push(testArray);
+            testArray = [];
+          }
+
+          // setDataOut(ticketsByPriorityTitle);
+          // }
+
+          // console.log('ticketsByPriorityPrio');
+          // console.log(ticketsByPriorityPrio);
+          // console.log('ticketsByPriorityTitle');
+          // console.log(ticketsByPriorityTitle);
+          // }
+
+          dataOutArray[0] = [];
+          dataOutArray[1] = [];
+          dataOutArray[2] = [];
+          dataOutArray[0][0] = ticketsByStatusPriority;
+          dataOutArray[0][1] = ticketsByStatusTitle;
+          dataOutArray[1][0] = ticketsByUsersPriority;
+          dataOutArray[1][1] = ticketsByUsersTitle;
+          dataOutArray[2][0] = ticketsByPriorityPrio;
+          dataOutArray[2][1] = ticketsByPriorityTitle;
+          // console.log(dataOutArray);
+          setDataOut(dataOutArray);
         }, 2000);
       })
       .catch((error) => {
@@ -205,7 +253,7 @@ const Dashboard = (props) => {
       .then((data) => {});
   }, []);
 
-  var key = 'key';
+  var key = "key";
 
   // if (GROUP_MODE === "STATUS") {
   //   key = ticketArray[0].status;
@@ -236,9 +284,18 @@ const Dashboard = (props) => {
         data &&
         dataOut &&
         dataOut[0][0] &&
-        dataOut.map((ticketArray) => {
+        dataOut[props.state.group][props.state.order].map((ticketArray) => {
           // console.log(ticketArray[0].userId);
-          return <ColumnBox mode={GROUP_MODE} array={ticketArray} key={key} />;
+          return (
+            <ColumnBox
+              mode={GROUP_MODE}
+              array={ticketArray}
+              users={data.users}
+              key={key}
+            />
+          );
+
+          // return <div></div>
         })}
     </ul>
   );

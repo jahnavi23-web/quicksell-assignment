@@ -9,9 +9,9 @@ function Main() {
   // console.log(state);
 
 
-  useEffect(()=> {
-    console.log(state);
-  })
+  // useEffect(()=> {
+  //   console.log(state);
+  // })
   // useEffect(() => {
   //   stateVar = state;
   // }, [])
@@ -28,7 +28,7 @@ function Main() {
   return (
     <div>
       <TopBar handler={handleStateChager}  />
-      {/* <Dashboard state={state} /> */}
+      <Dashboard state={state} />
     </div>
   );
 }
