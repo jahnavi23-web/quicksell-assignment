@@ -1,15 +1,17 @@
 import { useEffect, useState, useRef } from "react";
 import ColumnBox from "./ColumnBox";
+import "./Dashboard.css";
 
 const Dashboard = (props) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(undefined);
   const [data, setData] = useState([undefined]);
-  const [dataOut, setDataOut] = useState([[]]);
+  const [dataOut, setDataOut] = useState(undefined);
   const GROUP_MODES = ["STATUS", "USER", "PRIORITY"];
   const ORDER_MODES = ["PRIORITY", "TITLE"];
   const [GROUP_MODE, setGroup] = useState(GROUP_MODES[props.state.group]);
   const [ORDER_MODE, setOrder] = useState(ORDER_MODES[props.state.order]);
+  const [nColumnsText, setNColumnsText] = useState(5);
 
   const dataOutArray = [[]];
 
@@ -34,6 +36,21 @@ const Dashboard = (props) => {
   useEffect(() => {
     setGroup(GROUP_MODES[props.state.group]);
     setOrder(ORDER_MODES[props.state.order]);
+
+    // {
+    //   dataOut &&
+    //     (() => {
+    //       let length = dataOut[props.state.group][props.state.order].length;
+    //       let text = "";
+    //       for (let i = 0; i < length; i++) {
+    //         text = text + " 1fr ";
+    //       }
+
+    //       setNColumnsText(text);
+
+    //       return null;
+    //     });
+    // }
 
     // console.log("state: " + props.state.group + ", " + props.state.order);
     // console.log("GROUP_MODE: " + GROUP_MODE + ", ORDER_MODE: " + ORDER_MODE);
@@ -74,17 +91,17 @@ const Dashboard = (props) => {
           const usersLength = users.length;
           const ticketsLength = tickets.length;
 
-           ticketsByStatus = [];
-           ticketsByStatusPriority = [];
-           ticketsByStatusTitle = [];
-        
-           ticketsByUsers = [];
-           ticketsByUsersPriority = [];
-           ticketsByUsersTitle = [];
-        
-           ticketsByPriority = [];
-           ticketsByPriorityPrio = [];
-           ticketsByPriorityTitle = [];
+          ticketsByStatus = [];
+          ticketsByStatusPriority = [];
+          ticketsByStatusTitle = [];
+
+          ticketsByUsers = [];
+          ticketsByUsersPriority = [];
+          ticketsByUsersTitle = [];
+
+          ticketsByPriority = [];
+          ticketsByPriorityPrio = [];
+          ticketsByPriorityTitle = [];
 
           var testArray = [];
           // if (GROUP_MODE === "USER") {
@@ -238,6 +255,15 @@ const Dashboard = (props) => {
           dataOutArray[1][1] = ticketsByUsersTitle;
           dataOutArray[2][0] = ticketsByPriorityPrio;
           dataOutArray[2][1] = ticketsByPriorityTitle;
+
+          // let length = dataOutArray[props.state.group][props.state.order].length;
+          // let text = "";
+          // for (let i = 0; i < length; i++) {
+          //   text = text + " 1fr ";
+          // }
+
+          // setNColumnsText(text);
+
           // console.log(dataOutArray);
           setDataOut(dataOutArray);
         }, 2000);
@@ -263,19 +289,22 @@ const Dashboard = (props) => {
   //   key = ticketArray[0].priority;
   // }
 
-  return (
-    <ul
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "flex-start",
-        flexWrap: "nowrap",
-        backgroundColor: "#f4f5f8",
+  // let length = 5;
+  // let text = "";
+  // for (let i = 0; i < length; i++) {
+  //   text = text + " 1fr ";
+  // }
+  // console.log(text);
 
-        paddingLeft: "25px",
-        paddingRight: "15px",
-        paddingTop: "20px",
-        paddingBottom: "10px",
+  return (
+    // <ul className="DashboardColumnList">
+    <ul
+      className="bottomG"
+      style={{
+        display: "grid",
+        gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
+        // gridTemplateColumns: nColumnsText,
+        // gridTemplateRows: "1fr",
       }}
     >
       {/* {loading && <div>Loading...</div>} */}
@@ -294,11 +323,23 @@ const Dashboard = (props) => {
               key={key}
             />
           );
-
-          // return <div></div>
         })}
     </ul>
   );
+
+  // return (
+  //   <div className="a">
+  //     <div className="b">
+  //       <ul className="c">
+  //         <li className="d">A</li>
+  //         <li className="d">B</li>
+  //         <li className="d">D</li>
+  //         <li className="d">E</li>
+  //         <li className="d">F</li>
+  //       </ul>
+  //     </div>
+  //   </div>
+  // );
 };
 
 export default Dashboard;

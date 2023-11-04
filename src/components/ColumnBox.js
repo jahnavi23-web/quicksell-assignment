@@ -1,6 +1,7 @@
 import ListHeader from "./ListHeader";
 import ListCard from "./ListCard";
 import { useEffect, useState } from "react";
+import "./ColumnBox.css";
 
 const ColumnBox = (props) => {
   const [title, setTitle] = useState("       ");
@@ -23,7 +24,7 @@ const ColumnBox = (props) => {
 
   useEffect(() => {
     if (mode === "STATUS") {
-      if(props.array.length !== 0) {
+      if (props.array.length !== 0) {
         setTitle(props.array[0].status);
       }
       // for (let i = 0; i < props.array.length; i++) {
@@ -37,8 +38,10 @@ const ColumnBox = (props) => {
       // }
       // console.log("status " + title);
     } else if (mode === "USER") {
-      if(props.array.length !== 0) {
-        let user = props.users.find((user)=>{return (user.id === props.array[0].userId)});
+      if (props.array.length !== 0) {
+        let user = props.users.find((user) => {
+          return user.id === props.array[0].userId;
+        });
 
         // props.array[0].userId
         setTitle(user.name);
@@ -53,7 +56,7 @@ const ColumnBox = (props) => {
       // }
       // console.log("user " + title);
     } else if (mode === "PRIORITY") {
-      if(props.array.length !== 0) {
+      if (props.array.length !== 0) {
         setTitle(priorityNames[props.array[0].priority]);
       }
       // for (let i = 0; i < props.array.length; i++) {
@@ -79,37 +82,14 @@ const ColumnBox = (props) => {
   });
 
   return (
-  
-    <li
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        flexGrow: "1",
-        // backgroundColor: "yellow",
-
-        paddingLeft: "10px",
-        paddingRight: "15px",
-      }}
-    >
-      <ListHeader title={title} count={count} logo={null} />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          flexGrow: "1",
-          justifyContent: "center",
-          alignContent: "flex-start",
-          alignItems: "flex-start",
-          backgroundColor: 'blue',
-
-          listStyle: "none",
-          listStyleType: "none",
-          // width: '250px'
-        }}
-      >
-        {array.map((ticket) => {
-          return <ListCard data={ticket} key={ticket.id} />;
-        })}
+    <li className="column">
+      <div className="user">
+        <ListHeader title={title} count={count} logo={null} />
+        <div className="conversation">
+          {array.map((ticket) => {
+            return <ListCard data={ticket} key={ticket.id} />;
+          })}
+        </div>
       </div>
     </li>
   );

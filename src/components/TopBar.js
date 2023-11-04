@@ -105,7 +105,7 @@ const TopBar = (props) => {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "row", flexGrow: 1 }}>
+    <div className="top">
       <div
         style={{
           //   margin: "5px",

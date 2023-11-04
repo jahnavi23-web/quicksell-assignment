@@ -49,50 +49,41 @@ const ListCard = (props) => {
 
   // console.log(data);
 
+  // return <div></div>;
+
   return (
-    <div
-    style={{
-      display: "flex",
-      flexDirection: "row",
-      // flexGrow: "1",
-    }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          paddingBottom: "10px",
-          flexGrow: "1",
-          // backgroundColor: "red",
-          justifyContent: "space-between",
-          alignItems: "space-between;",
-        }}
-      >
-        <div className="ListCard">
-          <div style={{ display: "flex", flexDirection: "row", flexGrow: "1" }}>
-            <div className="ListCardInfo">
-              <div>
-                <div className="CardTitleBar">
-                  <div className="CardTitleText">{CARD_TITLE}</div>
-                </div>
-                <div className="CardBody">
-                  {MID_ICON}
-                  <div className="CardBodyText">{MESSAGE_BODY}</div>
-                </div>
-                <div className="CardFooter">
-                  {BOTTOM_ICON}
-                  <div className="FooterTextBox">
-                    <div className="FooterCircle"></div>
-                    <div className="FooterText">{BOTTOM_TAG}</div>
+    // <div className="ListBox">
+    <li className="message">
+      <div className="ListContainer">
+        <div>
+          <div className="ListCard">
+            <div
+              style={{ display: "flex", flexDirection: "row", flexGrow: "1" }}
+            >
+              <div className="ListCardInfo">
+                <div>
+                  <div className="CardTitleBar">
+                    <div className="CardTitleText">{CARD_TITLE}</div>
+                  </div>
+                  <div className="CardBody">
+                    {MID_ICON}
+                    <div className="CardBodyText">{MESSAGE_BODY}</div>
+                  </div>
+                  <div className="CardFooter">
+                    {BOTTOM_ICON}
+                    <div className="FooterTextBox">
+                      <div className="FooterCircle"></div>
+                      <div className="FooterText">{BOTTOM_TAG}</div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div>{DP_ICON}</div>
           </div>
-          <div>{DP_ICON}</div>
         </div>
       </div>
-    </div>
+    </li>
   );
 };
 

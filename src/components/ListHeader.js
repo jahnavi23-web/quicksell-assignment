@@ -21,7 +21,8 @@ const ListHeader = (props) => {
   }
   return (
     // <div style={{ width: "100px", height: "100px" }}>
-    <div className="HeaderBox">
+    // <div className="HeaderBox">
+    <div className="name">
       <div className="HeaderUserBox">
         <div className="HeaderIcon">
           {/* <DpIconHeader height="20px" width="20px" /> */}

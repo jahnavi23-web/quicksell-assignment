@@ -1,3 +1,12 @@
+.top {
+  display: flex;
+  flex-direction: row;
+
+  height: 50px;
+
+  /* border: red 4px solid; */
+}
+
 .knobsStyle {
   /* padding-top: 8px; */
   transform: rotate(90deg);
@@ -37,7 +46,12 @@
 
 .SelectionBox {
   /* padding-top: 10px; */
+  
   list-style-type: none;
+  list-style: none;
+
+  margin: 0;
+  padding: 0;
 
   background-color: #dddddd;
   /* background-color: yellow; */
@@ -47,8 +61,6 @@
   z-index: 200;
   top: 50px;
   left: 320px;
-  margin: 0;
-  padding: 0;
   
     box-shadow: 0px 0px 4px lightgray; 
 }
@@ -56,6 +68,10 @@
 .SelectionBox2 {
     /* padding-top: 10px; */
     list-style-type: none;
+    list-style: none;
+  
+    margin: 0;
+    padding: 0;
   
     background-color: #dddddd;
     /* background-color: yellow; */
@@ -65,8 +81,6 @@
     z-index: 200;
     top: 130px;
     left: 230px;
-    margin: 0;
-    padding: 0;
     
       box-shadow: 0px 0px 4px lightgray; 
   }
@@ -81,6 +95,14 @@
 
   font-size: 14px;
   cursor: pointer;
+
+  list-style-type: none;
+  list-style: none;
+
+  margin: 0;
+  /* padding: 0; */
+
+  z-index: 500;
 }
 .SelectionRow:hover {
   padding: 10px;

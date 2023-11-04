@@ -1,13 +1,73 @@
 .DashboardColumnList {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  /* flex-wrap: nowrap; */
 
-    background-color: #f4f5f8;
+  flex-grow: 1;
 
-    padding-left: 25px;
-    padding-right: 15px;
-    padding-top: 20px;
-    padding-bottom: 10px;
+  /* background-color: #f4f5f8; */
+  background-color: pink;
+
+  padding-left: 25px;
+  padding-right: 15px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+
+  /* border: yellow 4px solid; */
+
+  justify-content: space-evenly;
+
+  margin: 0;
+  padding: 0;
+}
+
+.bottomG {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+
+  /* border: yellow 4px solid; */
+
+  background-color: #f4f5f8;
+
+  justify-content: space-evenly;
+
+  margin: 0;
+  padding: 0;
+}
+
+.a {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  /* background-color: lightblue; */
+}
+
+.b {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  /* background-color: lightblue; */
+}
+
+.c {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+
+  list-style: none;
+  list-style-type: none;
+}
+
+.d {
+  list-style-type: none;
+  list-style: none;
 }

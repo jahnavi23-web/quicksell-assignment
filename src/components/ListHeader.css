@@ -108,3 +108,21 @@
   border-style: solid;
   border-color: white;
 }
+
+
+.name {
+  display: flex;
+  flex-direction: row;
+  /* flex-grow: 1; */
+  height: 50px;
+
+  /* border: violet 4px solid; */
+
+  background-color: #f4f5f8;
+  padding: 2px;
+  margin-bottom: 15px;
+
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}

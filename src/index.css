@@ -17,12 +17,24 @@ body {
 
   padding: 30px; */
 
-  border-width: 2px;
-  border-style: solid;
-  border-color: orange;
+  list-style-type: none;
+  list-style: none;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+li {
+  list-style-type: none;
+  list-style: none;
+
+}
+
+ul {
+  list-style-type: none;
+  list-style: none;
+
+  padding-inline-start: 0px;
 }
