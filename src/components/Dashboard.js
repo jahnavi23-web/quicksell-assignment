@@ -2,6 +2,62 @@ import { useEffect, useState, useRef } from "react";
 import ColumnBox from "./ColumnBox";
 import "./Dashboard.css";
 
+function compareTitle(a, b) {
+  var nameA = a.title.length,
+    nameB = b.title.length;
+
+  var result;
+  if (nameA < nameB)
+    //sort string ascending
+    result = -1;
+  else if (nameA > nameB) result = 1;
+  else result = 0; //default return value (no sorting)
+  // console.log("title \n" + a.title + '\n' + b.title + '\n' + result);
+
+  return result;
+}
+
+function comparePriority(a, b) {
+  return b.priority - a.priority;
+}
+
+function dynamicSort(property) {
+  var sortOrder = 1;
+  if (property[0] === "-") {
+    sortOrder = -1;
+    property = property.substr(1);
+  }
+  return function (a, b) {
+    /* next line works with strings and numbers,
+     * and you may want to customize it to your needs
+     */
+
+    var result =
+      a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
+
+    // console.log(property);
+    // console.log(a);
+    // console.log(b);
+    // console.log(result);
+
+    return result * sortOrder;
+  };
+}
+
+function compareTicketTitleText(a, b) {
+  var lengthA = a.title.length;
+  var lengthB = b.title.length;
+
+  return lengthA - lengthB; // Ascending order
+}
+
+function compareTicketsPriorityNumber(a, b) {
+  var lengthA = a.priority;
+  var lengthB = b.priority;
+
+  return lengthB - lengthA; // Descending order
+}
+
 const Dashboard = (props) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(undefined);
@@ -59,6 +115,9 @@ const Dashboard = (props) => {
   // console.log("state: " + props.state.group + ", " + props.state.order);
   // console.log("GROUP_MODE: " + GROUP_MODE + ", ORDER_MODE: " + ORDER_MODE);
 
+  var ticketsOrderPriority = [];
+  var ticketsOrderTitle = [];
+
   var ticketsByStatus = [];
   var ticketsByStatusPriority = [];
   var ticketsByStatusTitle = [];
@@ -90,6 +149,25 @@ const Dashboard = (props) => {
           const tickets = json.tickets;
           const usersLength = users.length;
           const ticketsLength = tickets.length;
+
+          ticketsOrderPriority = JSON.parse(JSON.stringify(tickets));
+          ticketsOrderTitle = JSON.parse(JSON.stringify(tickets));
+
+          ticketsOrderPriority = JSON.parse(
+            JSON.stringify(
+              ticketsOrderPriority.sort(compareTicketsPriorityNumber)
+            )
+          );
+          ticketsOrderTitle = JSON.parse(
+            JSON.stringify(ticketsOrderTitle.sort(compareTicketTitleText))
+          );
+
+          // console.log("tickets");
+          // console.log(tickets);
+          // console.log("ticketsOrderPriority");
+          // console.log(ticketsOrderPriority);
+          // console.log("ticketsOrderTitle");
+          // console.log(ticketsOrderTitle);
 
           ticketsByStatus = [];
           ticketsByStatusPriority = [];
@@ -123,21 +201,37 @@ const Dashboard = (props) => {
             testArray = [];
           }
 
+          // for (var i = 0; i < usersLength; i++) {
+          //   for (var j = 0; j < ticketsLength; j++) {
+          //     if (users[i].id === ticketsOrderPriority[j].userId) {
+          //       testArray.push(tickets[j]);
+          //     }
+          //   }
+          //   ticketsByUsersPriority.push(testArray);
+          //   testArray = [];
+          // }
+
+          // for (var i = 0; i < usersLength; i++) {
+          //   for (var j = 0; j < ticketsLength; j++) {
+          //     if (users[i].id === ticketsOrderTitle[j].userId) {
+          //       testArray.push(tickets[j]);
+          //     }
+          //   }
+          //   ticketsByUsersTitle.push(testArray);
+          //   testArray = [];
+          // }
+
           // if (ORDER_MODE === "PRIORITY") {
           for (var i = 0; i < usersLength; i++) {
-            testArray = ticketsByUsers[i].sort(function (a, b) {
-              return b.priority - a.priority;
-            });
-            ticketsByUsersPriority.push(testArray);
+            testArray = ticketsByUsers[i].sort(compareTicketsPriorityNumber);
+            ticketsByUsersPriority.push(JSON.parse(JSON.stringify(testArray)));
             testArray = [];
           }
           // setDataOut(ticketsByUsersPriority);
           // } else if (ORDER_MODE === "TITLE") {
           for (var i = 0; i < usersLength; i++) {
-            testArray = ticketsByUsers[i].sort(function (a, b) {
-              return a.title - b.title;
-            });
-            ticketsByUsersTitle.push(testArray);
+            testArray = ticketsByUsers[i].sort(compareTicketTitleText);
+            ticketsByUsersTitle.push(JSON.parse(JSON.stringify(testArray)));
             testArray = [];
           }
           // setDataOut(ticketsByUsersTitle);
@@ -170,22 +264,42 @@ const Dashboard = (props) => {
             testArray = [];
           }
 
+          // for (var i = 0; i < statusTypes.length; i++) {
+          //   for (var j = 0; j < ticketsLength; j++) {
+          //     if (statusTypes[i] === ticketsOrderPriority[j].status) {
+          //       testArray.push(tickets[j]);
+          //     }
+          //   }
+          //   ticketsByStatusPriority.push(testArray);
+          //   testArray = [];
+          // }
+
+          // for (var i = 0; i < statusTypes.length; i++) {
+          //   for (var j = 0; j < ticketsLength; j++) {
+          //     if (statusTypes[i] === ticketsOrderTitle[j].status) {
+          //       testArray.push(tickets[j]);
+          //     }
+          //   }
+          //   ticketsByStatusTitle.push(testArray);
+          //   testArray = [];
+          // }
+
           // if (ORDER_MODE === "PRIORITY") {
           for (var i = 0; i < statusTypes.length; i++) {
-            testArray = ticketsByStatus[i].sort(function (a, b) {
-              return b.priority - a.priority;
-            });
-            ticketsByStatusPriority.push(testArray);
+            testArray = ticketsByStatus[i].sort(comparePriority);
+            ticketsByStatusPriority.push(JSON.parse(JSON.stringify(testArray)));
             testArray = [];
           }
 
           // setDataOut(ticketsByStatusPriority);
           // } else if (ORDER_MODE === "TITLE") {
           for (var i = 0; i < statusTypes.length; i++) {
-            testArray = ticketsByStatus[i].sort(function (a, b) {
-              return a.title - b.title;
-            });
-            ticketsByStatusTitle.push(testArray);
+            // testArray = ticketsByStatus[i].sort(function (a, b) {
+            //   return a.title - b.title;
+            // });
+            testArray = ticketsByStatus[i].sort(compareTitle);
+
+            ticketsByStatusTitle.push(JSON.parse(JSON.stringify(testArray)));
             testArray = [];
           }
 
@@ -218,22 +332,40 @@ const Dashboard = (props) => {
           }
           // console.log(ticketsByPriority);
 
+          // for (var i = 0; i < priorityTypes.length; i++) {
+          //   for (var j = 0; j < ticketsLength; j++) {
+          //     if (priorityTypes[i] === ticketsOrderPriority[j].priority) {
+          //       testArray.push(tickets[j]);
+          //     }
+          //     // console.log(testArray);
+          //   }
+          //   ticketsByPriorityPrio.push(testArray);
+          //   testArray = [];
+          // }
+
+          // for (var i = 0; i < priorityTypes.length; i++) {
+          //   for (var j = 0; j < ticketsLength; j++) {
+          //     if (priorityTypes[i] === ticketsOrderTitle[j].priority) {
+          //       testArray.push(tickets[j]);
+          //     }
+          //     // console.log(testArray);
+          //   }
+          //   ticketsByPriorityTitle.push(testArray);
+          //   testArray = [];
+          // }
+
           // if (ORDER_MODE === "PRIORITY") {
           for (var i = 0; i < priorityTypes.length; i++) {
-            testArray = ticketsByPriority[i].filter(function (a) {
-              return a.priority === priorityTypes[i];
-            });
-            ticketsByPriorityPrio.push(testArray);
+            testArray = ticketsByPriority[i].sort(comparePriority);
+            ticketsByPriorityPrio.push(JSON.parse(JSON.stringify(testArray)));
             testArray = [];
           }
 
           // setDataOut(ticketsByPriorityPrio);
           // } else if (ORDER_MODE === "TITLE") {
           for (var i = 0; i < priorityTypes.length; i++) {
-            testArray = ticketsByPriority[i].sort(function (a, b) {
-              return a.title - b.title;
-            });
-            ticketsByPriorityTitle.push(testArray);
+            testArray = ticketsByPriority[i].sort(compareTitle);
+            ticketsByPriorityTitle.push(JSON.parse(JSON.stringify(testArray)));
             testArray = [];
           }
 
@@ -264,7 +396,14 @@ const Dashboard = (props) => {
 
           // setNColumnsText(text);
 
-          // console.log(dataOutArray);
+          // console.log("ticketsByStatus");
+          // console.log(ticketsByStatus);
+          // console.log('ticketsByUsers');
+          // console.log(ticketsByUsers);
+          // console.log('ticketsByPriority');
+          // console.log(ticketsByPriority);
+          // console.log("dataOutArray");
+          console.log(dataOutArray);
           setDataOut(dataOutArray);
         }, 2000);
       })
@@ -302,7 +441,7 @@ const Dashboard = (props) => {
       className="bottomG"
       style={{
         display: "grid",
-        gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
+        gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
         // gridTemplateColumns: nColumnsText,
         // gridTemplateRows: "1fr",
       }}
@@ -326,6 +465,8 @@ const Dashboard = (props) => {
         })}
     </ul>
   );
+
+  return <div></div>;
 
   // return (
   //   <div className="a">
