@@ -101,7 +101,7 @@ const TopBar = (props) => {
 
   let OptionsComp = null;
   if (showOptions) {
-    OptionsComp = <Options handler={handleStateChangeOptions} />;
+    OptionsComp = <Options handler={handleStateChangeOptions} state={state}/>;
   }
 
   return (
@@ -165,13 +165,19 @@ const DropdownOptions = (props) => {
   );
 };
 
+const GROUP_MODES = ["Status", "User", "Priority"];
+  const ORDER_MODES = ["Priority", "Title"];
+
 const Options = (props) => {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cookies, setCookie] = useCookies(["user"]);
 
   const [showGrouping, setShowGrouping] = useState(false);
   const [showOrdering, setShowOrdering] = useState(false);
+
+  const [groupSelected, setGroupSelected] = useState(GROUP_MODES[props.state.group]);
+  const [orderSelected, setOrderSelected] = useState(ORDER_MODES[props.state.order]);
 
   function handleDropdownGroupClick() {
     // console.log("group clicked");
@@ -189,6 +195,8 @@ const Options = (props) => {
     setCookie("Group", id, { path: "/" });
     // console.log("cookie  group updated");
 
+    setGroupSelected(GROUP_MODES[id]);
+
     props.handler(id, null);
   }
 
@@ -196,6 +204,8 @@ const Options = (props) => {
     // console.log("selection Order clicked " + id);
     setCookie("Order", id, { path: "/" });
     // console.log("cookie  order updated");
+
+    setOrderSelected(ORDER_MODES[id]);
     props.handler(null, id);
   }
 
@@ -226,7 +236,7 @@ const Options = (props) => {
           </div>
           <div>
             <DropdownOptions
-              option={"Status"}
+              option={groupSelected}
               handler={handleDropdownGroupClick}
               //   handler={handleStateChangeGrouping}
             />
@@ -243,7 +253,7 @@ const Options = (props) => {
           </div>
           <div>
             <DropdownOptions
-              option={"Priority"}
+              option={orderSelected}
               handler={handleDropdownOrderClick}
               //   handler={handleStateChangeGrouping}
             />
