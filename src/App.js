@@ -6,8 +6,13 @@ import Dashboard from "./components/Dashboard";
 import TopBar from "./components/TopBar";
 
 import { CookiesProvider } from "react-cookie";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(()=> {
+    document.title = "Quicksell Assignment";
+  })
+
   return (
     <CookiesProvider>
       <Main />
