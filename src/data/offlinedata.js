@@ -93,8 +93,8 @@ const data = {
 
 const tickets = data.tickets;
 
-console.log('tickets');
-console.log(tickets);
+// console.log('tickets');
+// console.log(tickets);
 
 const titles = [
   "Update User Profile Page UI",
@@ -148,5 +148,10 @@ var ticketsSortedbyTitle = tickets.sort(compareTicketTitleText);
 // console.log(ticketsSortedbyTitle);
 
 var ticketsSortedbyPriority = tickets.sort(compareTicketsPriorityNumber);
-console.log('ticketsSortedbyPriority');
-console.log(ticketsSortedbyPriority);
+// console.log('ticketsSortedbyPriority');
+// console.log(ticketsSortedbyPriority);
+
+
+let name = 'Akash Chandra';
+let nameSplit = name.split();
+console.log(nameSplit);

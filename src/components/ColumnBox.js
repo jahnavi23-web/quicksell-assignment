@@ -85,11 +85,11 @@ const ColumnBox = (props) => {
     <li className="column">
       <div className="user">
         <ListHeader title={title} count={count} logo={null} />
-        <div className="conversation">
+        <ul className="conversation">
           {array.map((ticket) => {
             return <ListCard data={ticket} key={ticket.id} mode={props.mode}/>;
           })}
-        </div>
+        </ul>
       </div>
     </li>
   );

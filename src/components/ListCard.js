@@ -92,6 +92,9 @@ const ListCard = (props) => {
 export default ListCard;
 
 export const DpIcon = (props) => {
+  // let name = 'Akash Chandra';
+  // let splitName = name.split();
+
   return (
     <div
       className="CardTitleLogo"
@@ -101,6 +104,7 @@ export const DpIcon = (props) => {
         src="wepik-export-20231101173926A2LC.jpeg"
         className="CardTitleLogo"
       />
+      {/* <div>{}</div> */}
       <div className="CardTitleLogoStatus" />
     </div>
   );
