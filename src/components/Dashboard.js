@@ -58,6 +58,14 @@ function compareTicketsPriorityNumber(a, b) {
   return lengthB - lengthA; // Descending order
 }
 
+const imgSrcs = [
+  "wepik-export-20231101173926A2LC.jpeg",
+  "pexels-photo-220453.jpg",
+  "7562313.jpeg",
+  "7322232.jpeg",
+  "1043471.jpeg",
+];
+
 const Dashboard = (props) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(undefined);
@@ -225,6 +233,7 @@ const Dashboard = (props) => {
           for (var i = 0; i < usersLength; i++) {
             testArray = ticketsByUsers[i].sort(compareTicketsPriorityNumber);
             testArray[0].key = i;
+            testArray[0].img = imgSrcs[i];
             ticketsByUsersPriority.push(JSON.parse(JSON.stringify(testArray)));
             testArray = [];
           }
@@ -233,6 +242,8 @@ const Dashboard = (props) => {
           for (var i = 0; i < usersLength; i++) {
             testArray = ticketsByUsers[i].sort(compareTicketTitleText);
             testArray[0].key = i;
+
+            testArray[0].img = imgSrcs[i];
             ticketsByUsersTitle.push(JSON.parse(JSON.stringify(testArray)));
             testArray = [];
           }
@@ -315,13 +326,16 @@ const Dashboard = (props) => {
           // console.log('ticketsByStatusTitle');
           // console.log(ticketsByStatusTitle);
           // } else if (GROUP_MODE === "PRIORITY") {
-          let priorityTypes = [];
-          for (var i = 0; i < ticketsLength; i++) {
-            priorityTypes.push(tickets[i].priority);
-          }
 
-          set = new Set(priorityTypes);
-          priorityTypes = [...set.keys()];
+          let priorityTypes = [4, 3, 2, 1, 0];
+
+          // let priorityTypes = [];
+          // for (var i = 0; i < ticketsLength; i++) {
+          //   priorityTypes.push(tickets[i].priority);
+          // }
+
+          // set = new Set(priorityTypes);
+          // priorityTypes = [...set.keys()];
           // console.log(priorityTypes[0]);
 
           for (var i = 0; i < priorityTypes.length; i++) {
@@ -374,7 +388,6 @@ const Dashboard = (props) => {
             ticketsByPriorityTitle.push(JSON.parse(JSON.stringify(testArray)));
             testArray = [];
           }
-          
 
           // setDataOut(ticketsByPriorityTitle);
           // }
@@ -461,13 +474,14 @@ const Dashboard = (props) => {
         dataOut[0][0] &&
         dataOut[props.state.group][props.state.order].map((ticketArray) => {
           // console.log(ticketArray[0].userId);
-          
+
           return (
             <ColumnBox
               mode={GROUP_MODE}
               array={ticketArray}
               users={data.users}
               key={ticketArray[0].key}
+              img={ticketArray[0].img ? ticketArray[0].img : null}
             />
           );
         })}

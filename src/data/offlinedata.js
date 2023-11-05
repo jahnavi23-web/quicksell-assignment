@@ -142,8 +142,6 @@ function compareTicketsPriorityNumber(a, b) {
   return lengthB - lengthA; // Descending order
 }
 
-
-
 var ticketsSortedbyTitle = tickets.sort(compareTicketTitleText);
 // console.log(ticketsSortedbyTitle);
 
@@ -151,7 +149,12 @@ var ticketsSortedbyPriority = tickets.sort(compareTicketsPriorityNumber);
 // console.log('ticketsSortedbyPriority');
 // console.log(ticketsSortedbyPriority);
 
+let name = "Akash Surya";
+let nameSplit = name.split(" ");
+// console.log(nameSplit);
+let short = nameSplit[0][0];
+if (nameSplit.length > 1) {
+  short = short + nameSplit[1][0];
+}
 
-let name = 'Akash Chandra';
-let nameSplit = name.split();
-console.log(nameSplit);
+// console.log(short);

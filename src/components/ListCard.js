@@ -6,7 +6,20 @@ import { LiaEllipsisHSolid } from "react-icons/lia";
 import { BsExclamationSquareFill } from "react-icons/bs";
 import { IconContext } from "react-icons/lib";
 import { HiOutlineEllipsisHorizontal } from "react-icons/hi2";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getCardFooterLogo, getCardMidLogo } from "./ColumnBox";
+
+function getUserName(props) {
+  if (props.data.userId && props.users) {
+    let user = props.users.find((user) => {
+      return user.id === props.data.userId;
+    });
+
+    // props.array[0].userId
+    // setTitle(user.name);
+    return user.name;
+  }
+}
 
 const ListCard = (props) => {
   let data = props.data;
@@ -24,30 +37,32 @@ const ListCard = (props) => {
   let MID_ICON;
   let DP_ICON;
 
-
-    if (props.mode === "USER") {
-      CARD_TITLE = id;
-      MESSAGE_BODY = title;
-      BOTTOM_TAG = tag;
-      BOTTOM_ICON = <FooterIcon />;
-      MID_ICON = <MidIcon />;
-      DP_ICON = null;
-    } else if (props.mode === "STATUS") {
-      CARD_TITLE = id;
-      MESSAGE_BODY = title;
-      BOTTOM_TAG = tag;
-      BOTTOM_ICON = <FooterIcon />;
-      MID_ICON = null;
-      DP_ICON = <DpIcon height="22px" width="22px" />;
-    } else if (props.mode === "PRIORITY") {
-      CARD_TITLE = id;
-      MESSAGE_BODY = title;
-      BOTTOM_TAG = tag;
-      BOTTOM_ICON = null;
-      MID_ICON = <MidIcon />;
-      DP_ICON = <DpIcon height="22px" width="22px" />;
-    }
-
+  if (props.mode === "USER") {
+    CARD_TITLE = id;
+    MESSAGE_BODY = title;
+    BOTTOM_TAG = tag;
+    // BOTTOM_ICON = <FooterIcon props={props} />;
+    BOTTOM_ICON = getCardFooterLogo(props);
+    // MID_ICON = <MidIcon />;
+    MID_ICON = getCardMidLogo(props);
+    DP_ICON = null;
+  } else if (props.mode === "STATUS") {
+    CARD_TITLE = id;
+    MESSAGE_BODY = title;
+    BOTTOM_TAG = tag;
+    // BOTTOM_ICON = <FooterIcon props={props} />;
+    BOTTOM_ICON = getCardFooterLogo(props);
+    MID_ICON = null;
+    DP_ICON = <DpIcon height="22px" width="22px" name={props.name} imgSrc="" />;
+  } else if (props.mode === "PRIORITY") {
+    CARD_TITLE = id;
+    MESSAGE_BODY = title;
+    BOTTOM_TAG = tag;
+    BOTTOM_ICON = null;
+    // MID_ICON = <MidIcon />;
+    MID_ICON = getCardMidLogo(props);
+    DP_ICON = <DpIcon height="22px" width="22px" name={props.name} imgSrc="" />;
+  }
 
   // console.log(data);
 
@@ -92,32 +107,82 @@ const ListCard = (props) => {
 export default ListCard;
 
 export const DpIcon = (props) => {
-  // let name = 'Akash Chandra';
-  // let splitName = name.split();
+  const [name, setName] = useState(props.name);
+  const [img, setImg] = useState(props.img);
+
+  // console.log(props);
+
+  useEffect(() => {
+    // let name = "Aksah Chandra";
+    let name = props.name;
+    name = name.toUpperCase();
+
+    let nameSplit = name.split(" ");
+    // console.log(nameSplit);
+    let short = nameSplit[0][0];
+    if (nameSplit.length > 1) {
+      short = short + nameSplit[1][0];
+    }
+    setName(short);
+  });
 
   return (
     <div
       className="CardTitleLogo"
-      style={{ height: props.height, width: props.width }}
+      style={{
+        height: props.height,
+        width: props.width,
+        // justifyContent: "center",
+        alignContent: "center",
+        // alignItems: "center",
+      }}
     >
+      <div
+        style={{
+          height: props.height,
+          width: props.width,
+          borderRadius: props.height,
+          fontSize: 12,
+          fontWeight: "bold",
+
+          display: "flex",
+
+          position: "absolute",
+          // right: props.width,
+          // top: props.height,
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
+          alignSelf: "center",
+
+          textAlign: "center",
+          verticalAlign: "center",
+
+          backgroundColor: "#87CEEB",
+          color: "#eeeeee",
+        }}
+      >
+        {" "}
+        {name}{" "}
+      </div>
       <img
-        src="wepik-export-20231101173926A2LC.jpeg"
+        // src={img}
+        src={img}
         className="CardTitleLogo"
+        onError={(event) => (event.target.style.display = "none")}
       />
-      {/* <div>{}</div> */}
       <div className="CardTitleLogoStatus" />
     </div>
   );
 };
 
 export const FooterIcon = (props) => {
-  return (
-    <IconContext.Provider value={{ color: "grey", size: "14px" }}>
-      <div className="FooterIcon">
-        <HiOutlineEllipsisHorizontal />
-      </div>
-    </IconContext.Provider>
-  );
+  return getCardFooterLogo(props);
+  // <IconContext.Provider value={{ color: "grey", size: "14px" }}>
+  //   <div className="FooterIcon">
+  //     <HiOutlineEllipsisHorizontal />
+  //   </div>
+  // </IconContext.Provider>
 };
 
 const MidIcon = () => {
