@@ -1,21 +1,16 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Quicksell Assignment",
+  "name": "Webpage for submission against Quicksell Assignment",
   "icons": [
     {
-      "src": "logoQk.png",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "src": "favicon.png",
+      "sizes": "239x239 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
       "src": "logoQk.png",
       "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logoQk.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "603x603"
     }
   ],
   "start_url": ".",
