@@ -1,11 +1,6 @@
 import "./ListCard.css";
-import Icons from "./Icons";
-// import { HiOutlineEllipsisHorizontal } from "react-icons/hi";
-// import { FaBeer, FaEllipsis } from "react-icons/fa";
-import { LiaEllipsisHSolid } from "react-icons/lia";
 import { BsExclamationSquareFill } from "react-icons/bs";
 import { IconContext } from "react-icons/lib";
-import { HiOutlineEllipsisHorizontal } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 import { getCardFooterLogo, getCardMidLogo } from "./ColumnBox";
 
@@ -15,8 +10,6 @@ function getUserName(props) {
       return user.id === props.data.userId;
     });
 
-    // props.array[0].userId
-    // setTitle(user.name);
     return user.name;
   }
 }
@@ -41,16 +34,13 @@ const ListCard = (props) => {
     CARD_TITLE = id;
     MESSAGE_BODY = title;
     BOTTOM_TAG = tag;
-    // BOTTOM_ICON = <FooterIcon props={props} />;
     BOTTOM_ICON = getCardFooterLogo(props);
-    // MID_ICON = <MidIcon />;
     MID_ICON = getCardMidLogo(props);
     DP_ICON = null;
   } else if (props.mode === "STATUS") {
     CARD_TITLE = id;
     MESSAGE_BODY = title;
     BOTTOM_TAG = tag;
-    // BOTTOM_ICON = <FooterIcon props={props} />;
     BOTTOM_ICON = getCardFooterLogo(props);
     MID_ICON = null;
     DP_ICON = <DpIcon height="22px" width="22px" name={props.name} imgSrc="" />;
@@ -59,17 +49,11 @@ const ListCard = (props) => {
     MESSAGE_BODY = title;
     BOTTOM_TAG = tag;
     BOTTOM_ICON = null;
-    // MID_ICON = <MidIcon />;
     MID_ICON = getCardMidLogo(props);
     DP_ICON = <DpIcon height="22px" width="22px" name={props.name} imgSrc="" />;
   }
 
-  // console.log(data);
-
-  // return <div></div>;
-
   return (
-    // <div className="ListBox">
     <li className="message">
       <div className="ListContainer">
         <div>
@@ -110,15 +94,12 @@ export const DpIcon = (props) => {
   const [name, setName] = useState(props.name);
   const [img, setImg] = useState(props.img);
 
-  // console.log(props);
-
   useEffect(() => {
     // let name = "Aksah Chandra";
     let name = props.name;
     name = name.toUpperCase();
 
     let nameSplit = name.split(" ");
-    // console.log(nameSplit);
     let short = nameSplit[0][0];
     if (nameSplit.length > 1) {
       short = short + nameSplit[1][0];
@@ -132,9 +113,7 @@ export const DpIcon = (props) => {
       style={{
         height: props.height,
         width: props.width,
-        // justifyContent: "center",
         alignContent: "center",
-        // alignItems: "center",
       }}
     >
       <div
@@ -148,8 +127,6 @@ export const DpIcon = (props) => {
           display: "flex",
 
           position: "absolute",
-          // right: props.width,
-          // top: props.height,
           justifyContent: "center",
           alignContent: "center",
           alignItems: "center",
@@ -166,7 +143,6 @@ export const DpIcon = (props) => {
         {name}{" "}
       </div>
       <img
-        // src={img}
         src={img}
         className="CardTitleLogo"
         onError={(event) => (event.target.style.display = "none")}
@@ -178,52 +154,14 @@ export const DpIcon = (props) => {
 
 export const FooterIcon = (props) => {
   return getCardFooterLogo(props);
-  // <IconContext.Provider value={{ color: "grey", size: "14px" }}>
-  //   <div className="FooterIcon">
-  //     <HiOutlineEllipsisHorizontal />
-  //   </div>
-  // </IconContext.Provider>
 };
 
 const MidIcon = () => {
   return (
-    // <div className="CardBody">
     <IconContext.Provider value={{ color: "blue", size: "10px" }}>
       <div className="CardBodyIcon">
         <BsExclamationSquareFill />
       </div>
     </IconContext.Provider>
-    // </div>
   );
 };
-
-{
-  /* <div className="CardTitleLogo" style={{ height: "24px", width: "24px" }}>
-<img
-  src="wepik-export-20231101173926A2LC.jpeg"
-  className="CardTitleLogo"
-/>
-<div className="CardTitleLogoStatus" />
-</div> */
-}
-
-{
-  /* <div className="FooterIcon"> */
-}
-{
-  /* <LiaEllipsisHSolid /> */
-}
-{
-  /* <IconContext.Provider value={{ color: "grey", size: "14px" }}>
-              <div className="FooterIcon">
-                {/* <BsExclamationSquareFill /> */
-}
-{
-  /* <HiOutlineEllipsisHorizontal /> */
-}
-{
-  /* </div> */
-}
-{
-  /* </IconContext.Provider> */
-}

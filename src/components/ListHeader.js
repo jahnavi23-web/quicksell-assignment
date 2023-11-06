@@ -3,25 +3,7 @@ import { BiPlus } from "react-icons/bi";
 import { HiOutlineEllipsisHorizontal } from "react-icons/hi2";
 import { DpIcon } from "./ListCard";
 
-
-
 const ListHeader = (props) => {
-  // let Icon = (
-  //   <div
-  //     style={{
-  //       height: "20px",
-  //       width: "20px",
-  //       backgroundColor: "lightblue",
-  //       borderRadius: "20px",
-  //       position: 'relative',
-  //     }}
-  //   >
-  //     <div className="CardTitleLogoStatus" />
-  //   </div>
-  // );
-
-  // console.log(props);
-
   let Icon = (
     <DpIcon
       height="20px"
@@ -35,18 +17,12 @@ const ListHeader = (props) => {
     Icon = props.logo;
   }
   return (
-    // <div style={{ width: "100px", height: "100px" }}>
-    // <div className="HeaderBox">
     <div className="name">
       <div className="HeaderUserBox">
-        <div className="HeaderIcon">
-          {/* <DpIconHeader height="20px" width="20px" /> */}
-          {Icon}
-        </div>
+        <div className="HeaderIcon">{Icon}</div>
         <div className="HeaderTitle">{props.title}</div>
         <div className="HeaderCount">{props.count}</div>
       </div>
-      {/* <div className="Spacer"></div> */}
       <div className="HeaderOptions">
         <div className="HeaderPlus">
           <BiPlus />
@@ -56,7 +32,6 @@ const ListHeader = (props) => {
         </div>
       </div>
     </div>
-    // </div>
   );
 };
 

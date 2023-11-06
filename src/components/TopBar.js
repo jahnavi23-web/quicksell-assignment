@@ -8,11 +8,9 @@ import "./TopBar.css";
 import { useCookies } from "react-cookie";
 
 const TopBar = (props) => {
-  //   const inputRef = useRef(null);
   const [showOptions, setShowOptions] = useState(false);
 
   const [state, setState] = useState({ group: 0, order: 0 });
-  // const stateRef = useRef(state);
 
   const [cookies, setCookie] = useCookies(["state"]);
 
@@ -30,30 +28,6 @@ const TopBar = (props) => {
     }
   }, []);
 
-  // let x = cookies.group;
-  // console.log(cookies.Order);
-  // useEffect(() => {
-  // if (
-  //   getCookie("Group") == 1 ||
-  //   getCookie("Group") == 2 ||
-  //   getCookie("Group") == 3
-  // )
-  // if (cookies.Group == 0 || cookies.Group == 1 || cookies.Group == 2) {
-  //   // console.log(cookies already exists");
-  //   let new_state = { group: cookies.Group, order: cookies.Order };
-  //   // setState(new_state)
-  //   props.handler(new_state);
-  // ;
-  // } else {
-  // console.log("Cookie doesn't exist");
-  // let new_state = { group: 0, order: 0 };
-  // stateRef.current = new_state;
-  // setCookie("Group", state.group, { path: "/" });
-  // setCookie("Order", state.order, { path: "/" });
-  // props.handler(state);
-  //   }
-  // });
-
   function handleClick() {
     setShowOptions(!showOptions);
   }
@@ -67,7 +41,6 @@ const TopBar = (props) => {
           group: group,
           order: state.order,
         };
-        // stateRef.current = new_state;
         setState(new_state);
         props.handler(new_state);
       }
@@ -79,36 +52,21 @@ const TopBar = (props) => {
           group: state.group,
           order: order,
         };
-        // stateRef.current = new_state;
         setState(new_state);
         props.handler(new_state);
       }
     }
-
-    // setCookie("Group", state.group, { path: "/" });
-    // setCookie("Order", state.order, { path: "/" });
-
-    // console.log(
-    //   "New state: group " +
-    //     state.group +
-    //     ", order " +
-    //     state.order
-    // );
-    // console.log(getCookie("Group"));
   }
-
-  // console.log(cookies.Group);
 
   let OptionsComp = null;
   if (showOptions) {
-    OptionsComp = <Options handler={handleStateChangeOptions} state={state}/>;
+    OptionsComp = <Options handler={handleStateChangeOptions} state={state} />;
   }
 
   return (
     <div className="top">
       <div
         style={{
-          //   margin: "5px",
           marginTop: "15px",
           marginBottom: "0px",
           marginLeft: "40px",
@@ -125,7 +83,6 @@ export default TopBar;
 
 const Dropdown = (props) => {
   const handleClick = () => {
-    // alert("dropdown clicked");
     props.handler();
   };
 
@@ -150,7 +107,6 @@ const Dropdown = (props) => {
 
 const DropdownOptions = (props) => {
   function handleClick() {
-    // alert(props.option + " clicked");
     props.handler();
   }
   return (
@@ -166,18 +122,21 @@ const DropdownOptions = (props) => {
 };
 
 const GROUP_MODES = ["Status", "User", "Priority"];
-  const ORDER_MODES = ["Priority", "Title"];
+const ORDER_MODES = ["Priority", "Title"];
 
 const Options = (props) => {
-  // const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cookies, setCookie] = useCookies(["user"]);
 
   const [showGrouping, setShowGrouping] = useState(false);
   const [showOrdering, setShowOrdering] = useState(false);
 
-  const [groupSelected, setGroupSelected] = useState(GROUP_MODES[props.state.group]);
-  const [orderSelected, setOrderSelected] = useState(ORDER_MODES[props.state.order]);
+  const [groupSelected, setGroupSelected] = useState(
+    GROUP_MODES[props.state.group]
+  );
+  const [orderSelected, setOrderSelected] = useState(
+    ORDER_MODES[props.state.order]
+  );
 
   function handleDropdownGroupClick() {
     // console.log("group clicked");
@@ -219,8 +178,6 @@ const Options = (props) => {
     GroupComponent = null;
     OrderComponent = <SelectionBoxOrder handler={handleSelectionOrderClick} />;
   }
-  //   handleStateChangeGrouping;
-  //   handleStateChangeOptions;
 
   return (
     <div>
@@ -238,7 +195,6 @@ const Options = (props) => {
             <DropdownOptions
               option={groupSelected}
               handler={handleDropdownGroupClick}
-              //   handler={handleStateChangeGrouping}
             />
           </div>
         </div>
@@ -255,7 +211,6 @@ const Options = (props) => {
             <DropdownOptions
               option={orderSelected}
               handler={handleDropdownOrderClick}
-              //   handler={handleStateChangeGrouping}
             />
           </div>
         </div>
@@ -272,8 +227,6 @@ const SelectionBoxOrder = (props) => {
   return (
     <ul className="SelectionBox2">
       <SelectionRow group={"Priority"} key={0} id={0} handler={props.handler} />
-      {/* <SelectionRow group={"Priority"} key={4} id={4} handler={handleChange} /> */}
-      {/* <SelectionRow group={"Title"} key={5} id={5} handler={handleChange} /> */}
       <SelectionRow group={"Title"} key={1} id={1} handler={props.handler} />
     </ul>
   );
@@ -291,7 +244,6 @@ const SelectionBoxGroup = (props) => {
 
 const SelectionRow = (props) => {
   function handleClick() {
-    // alert(props.group + " clicked " + props.id);
     props.handler(props.id);
   }
 
@@ -301,21 +253,3 @@ const SelectionRow = (props) => {
     </li>
   );
 };
-
-//   const handleClick = () => {
-//     setCookie("Data", data, { path: "/" });
-//     // setCookie("Password", pwd, { path: "/" });
-//   };
-//   useEffect(() => {
-//     fetch(url)
-//       .then((resp) => resp.json())
-//       .then((json) => {
-//         setData(json);
-//         console.log(json.tickets[0].id);
-//       })
-//       .catch((error) => console.error(error))
-//       .finally(() => {
-//         setLoading(false);
-//       });
-//   }, []);
-//   const url = "https://api.quicksell.co/v1/internal/frontend-assignment";
